@@ -10,15 +10,14 @@ app.use(express.json())
 
 app.use(cors())
 // creating a destuctering fuction
-const {getHouse, 
+const {getHouses, 
     deleteHouse, 
     createHouse,
     updateHouse,
-
 } = require('./controller')
 
 //declaring end points for the functions
-app.get('/api/houses', getHouse)
+app.get('/api/houses', getHouses)
 
 //creating a deleteHouse request 
 

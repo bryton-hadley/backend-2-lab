@@ -1,9 +1,9 @@
 const houses = require('./db.json')
-let globelID = 4;
+let globalID = 4;
 
 module.exports = {
-    getHouse: (req, res) =>{
-     res.status (200).send(houses)
+        getHouses: (req, res) =>{
+     res.status(200).send(houses)
     },
     deleteHouse: (req, res) => {
         let index = houses.findIndex((element) => element.id === +req.params.id)
@@ -11,32 +11,31 @@ module.exports = {
         res.status(200).send(houses)
     },
     createHouse: (req, res) => {
-        const {address, price, imageURL,} = req.body;
+        const {address, price, imageURL} = req.body;
         let newHouse = {
             address,
             price: +price,
             imageURL,
-            id: globelID
+            id: globalID
         }
         houses.push(newHouse)
         res.status(200).send(houses)
-        globelID++;
+        globalID++;
     },
     updateHouse: (req, res) => {
         let {id} = req.params
         let {type} = req.body
-
-        let index = houses.findIndex((element) => element.id === +id) 
+        let index = houses.findIndex((element) => +element.id === +id) 
 
         if(houses[index].price <= 10000 && type === 'minus'){
             houses[index].price = 0
             res.status(200).send(houses)
-        }else if( type === 'plus') {
+        } else if( type === 'plus') {
             houses[index].price += 10000
             res.status(200).send(houses)
-        }else if(type === 'minus'){
+        } else if(type === 'minus'){
             houses[index].price -= 10000
-        }else {
+        } else {
             res.sendStatus(400)
         }
         
